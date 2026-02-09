@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Base de Conocimiento CCEE ARGENTINA</title>
+    <style>
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: #0d0d0d;
+            background-image:
+                radial-gradient(circle at 50% 10%, rgba(255, 102, 0, 0.15) 0%, transparent 60%),
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 40px 40px, 40px 40px;
+            background-attachment: fixed;
+            color: #e0e0e0;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .header-belltech {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #ff6600;
+            border-radius: 0 0 30px 30px;
+        }
+
+        .logo-belltech {
+            height: 70px;
+        }
+
+        .contenedor-tabs {
+            display: flex;
+            gap: 5px;
+            padding: 0 5px;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 12px 2px;
+            background: #1a1a1a;
+            color: #777;
+            border: 1px solid #333;
+            border-bottom: none;
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tab-button.active {
+            background: #ff6600;
+            color: #000;
+            border-color: #ff6600;
+            box-shadow: 0 -5px 15px rgba(255, 102, 0, 0.2);
+        }
+
+        .tab-content-box {
+            border: 2px solid #ff6600;
+            border-radius: 0 15px 15px 15px;
+            background: #111;
+            height: 800px;
+            padding: 15px;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        .tab-content-box::-webkit-scrollbar {
+            width: 0;
+            background: transparent;
+        }
+
+        .contenedor-dual {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .columna-mitad {
+            flex: 1;
+            width: 50%;
+        }
+
+        .grid-sensores {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 15px;
+            padding: 10px;
+        }
+
+        .item-sensor {
+            background: #222;
+            padding: 8px;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+
+        .item-sensor:hover {
+            border-color: #ff6600;
+            background: #2a2a2a;
+        }
+
+        .img-sensor-min {
+            width: 100%;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .btn-volver {
+            background: linear-gradient(135deg, #b34700 0%, #ff6600 100%);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 50px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .img-layout-original {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            background: white;
+            border: 1px solid #ff6600;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            padding-top: 50px;
+        }
+
+        .card-atm {
+            width: 220px;
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.4s;
+        }
+
+        .card-atm:hover {
+            border-color: #ff6600;
+            transform: translateY(-10px);
+        }
+
+        .card-atm img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+        }
+
+        .atm-label {
+            color: #ff6600;
+            font-weight: 800;
+            padding: 15px 0;
+            text-transform: uppercase;
+        }
+
+        .contenedor-interactivo {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            background: white;
+            border: 1px solid #ff6600;
+        }
+
+        .contenedor-interactivo img {
+            width: 100%;
+            display: block;
+        }
+
+        .zona-modulo {
+            position: absolute;
+            cursor: pointer;
+            transition: 0.4s ease;
+            z-index: 2;
+        }
+
+        .zona-modulo:hover {
+            background: rgba(255, 102, 0, 0.3);
+            box-shadow: inset 0 0 15px #ff6600;
+        }
+
+        .etiqueta-modulo {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.85);
+            color: #ff983f;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-size: 9px;
+            font-weight: bold;
+            border: 1px solid #ff6600;
+            pointer-events: none;
+        }
+
+        .oculto {
+            display: none !important;
+        }
+
+        h3 {
+            color: #ff6600;
+            border-left: 5px solid #ff6600;
+            padding-left: 15px;
+            text-align: left;
+            text-transform: uppercase;
+            font-size: 14px;
+            margin-top: 0;
+        }
+
+        .nav-buttons-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-nav {
+            background: #333;
+            color: white;
+            border: 1px solid #ff6600;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-nav:disabled {
+            opacity: 0.2;
+            cursor: not-allowed;
+            border-color: #555;
+        }
+
+        /* Estilos Lupa Agregados */
+        .zoom-lupa {
+            position: absolute;
+            border: 3px solid #ff6600;
+            border-radius: 50%;
+            cursor: none;
+            width: 200px;
+            height: 200px;
+            display: none;
+            pointer-events: none;
+            background-repeat: no-repeat;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .contenedor-zoom {
+            position: relative;
+            display: inline-block;
+            cursor: crosshair;
+        }
+
+        /*SpareParts*/
+        .seccion-inferior {
+            margin-top: 25px;
+            border-top: 2px solid #333;
+            padding-top: 20px;
+            width: 100%;
+        }
+
+        .titulo-seccion {
+            color: #e0e0e0;
+            font-size: 18px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            text-align: left;
+            border-left: 5px solid #ff6600;
+            padding-left: 15px;
+        }
+
+        .grid-spare {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .card-spare {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 150px;
+        }
+
+        .card-spare:hover {
+            border-color: #ff6600;
+            background: #222;
+            transform: translateY(-5px);
+        }
+
+        .icon-pdf {
+            font-size: 40px;
+            color: #ff6600;
+            margin-bottom: 10px;
+        }
+
+        .titulo-spare {
+            font-size: 12px;
+            font-weight: bold;
+            color: #ccc;
+            text-transform: uppercase;
+        }
+
+        .contenedor-pdf-full {
+            width: 100%;
+            height: 800px;
+            background: #111;
+            border: 2px solid #ff6600;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+@media (max-width: 800px) {
+            .contenedor-dual {
+                flex-direction: column;
+            }
+
+            .columna-mitad {
+                width: 100%;
+            }
+
+            #columna-dinamica {
+                height: auto;
+                min-height: 400px;
+            }
+
+
+            #contenedor-pdfs-derecha, .contenedor-pdf-full {
+                height: 85vh !important;
+                min-height: 600px;
+                display: block; 
+            }
+
+            #contenedor-pdfs-derecha iframe, .contenedor-pdf-full iframe {
+                width: 100% !important; 
+                height: 100% !important;
+                border: none;
+            }
+
+            .tab-content-box {
+                height: auto; 
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-belltech">
+        <img src="img/belltech.jpg" alt="Belltech" class="logo-belltech">
+        <div style="text-align:left;">
+            <h1 style="color:#ff6600; margin:0; letter-spacing:2px; font-size: 22px;">BASE DE CONOCIMIENTO CANALES</h1>
+            <p style="margin:0; color:#888; font-weight:bold; font-size: 11px;">ALAN CARITA - CCEE BELLTECH ARGENTINA 2026</p>
+        </div>
+    </div>
+
+    <div id="controles-navegacion" class="oculto">
+        <button onclick="irAlMenu()" class="btn-volver">🏠 VOLVER AL MENÚ PRINCIPAL</button>
+    </div>
+
+    <div id="menu-principal" class="menu">
+        <div class="card-atm" onclick="seleccionar('MX5700')">
+            <img src="img/5700_BASE.png">
+            <div class="atm-label">MX5700</div>
+        </div>
+        <div class="card-atm" onclick="seleccionar('MS500AR')">
+            <img src="img/MS500_BASE.png">
+            <div class="atm-label">MS500</div>
+        </div>
+        <div class="card-atm" onclick="seleccionar('MX8200')">
+            <img src="img/8200_BASE.png">
+            <div class="atm-label">MX8200</div>
+        </div>
+    </div>
+
+    <div id="visor" class="oculto">
+        <div class="contenedor-dual">
+            <div class="columna-mitad">
+                <div class="contenedor-tabs">
+                    <button id="btn-izq-sensores" class="tab-button active" onclick="switchTabIzq('sensores')">⚡ Layout
+                        Sensores</button>
+                    <button id="btn-izq-actuadores" class="tab-button" onclick="switchTabIzq('actuadores')">🔧 Layout
+                        Actuadores</button>
+                    <button id="btn-izq-nav" class="tab-button" onclick="switchTabIzq('nav')">🎞️ Exploración
+                        Módulos</button>
+                </div>
+                <div class="tab-content-box" id="columna-dinamica"></div>
+            </div>
+            <div class="columna-mitad">
+                <div class="contenedor-tabs">
+                    <button id="btn-der-pdf" class="tab-button active" onclick="switchTabDer('pdf')">🚩 Codigos de
+                        Error</button>
+                    <button id="btn-der-sens" class="tab-button" onclick="switchTabDer('sens')">⚙️ Funcion/Tipos de
+                        Sensores</button>
+                    <button id="btn-der-inst" class="tab-button" onclick="switchTabDer('inst')">🔌 INSTALACION</button>
+                </div>
+                <div class="tab-content-box" style="padding:0;" id="contenedor-pdfs-derecha">
+                    <iframe id="pdf-errores" src="" width="100%" height="100%"
+                        style="border:none; background: white;"></iframe>
+                    <iframe id="pdf-sensores" src="" width="100%" height="100%" style="border:none; background: white;"
+                        class="oculto"></iframe>
+                    <iframe id="pdf-instalacion" src="" width="100%" height="100%"
+                        style="border:none; background: white;" class="oculto"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="seccion-inferior" id="seccion-spares">
+            <h3 class="titulo-seccion">🛠️ REMPLAZO DE MODULOS</h3>
+
+            <div id="grid-spare-container" class="grid-spare">
+            </div>
+
+            <div id="visor-spare-pdf" class="oculto">
+                <div style="text-align: right; margin-bottom: 10px;">
+                    <button onclick="cerrarSparePDF()" class="btn-volver"
+                        style="background: #333; border: 1px solid #ff6600;">⬅️ VOLVER</button>
+                </div>
+                <div class="contenedor-pdf-full">
+                    <iframe id="iframe-spare" src="" width="100%" height="100%" style="border:none;"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let equipoActual = "";
+        let lupaActiva = false;
+
+        const dbSensores = {
+            "MX5700": {
+                "Throat": [
+                    { nombre: "THROAT", img: "img/sensores/5700/THROAT/1.png" }],
+                "Main Body": [
+                    { nombre: "Main Body", img: "img/sensores/5700/MAIN_BODY/1.png" },
+                    { nombre: "HS007/8", img: "img/sensores/5700/MAIN_BODY/2.png" },
+                    { nombre: "HS012", img: "img/sensores/5700/MAIN_BODY/3.png" },
+                    { nombre: "HS022", img: "img/sensores/5700/MAIN_BODY/4.png" },
+                    { nombre: "HS016", img: "img/sensores/5700/MAIN_BODY/5.png" },
+                    { nombre: "HS001 D/T", img: "img/sensores/5700/MAIN_BODY/6.png" },
+                    { nombre: "HS004 D/T PRISM", img: "img/sensores/5700/MAIN_BODY/7.png" },
+                    { nombre: "PRISM HS005", img: "img/sensores/5700/MAIN_BODY/8.png" },
+                    { nombre: "HS005 D/T", img: "img/sensores/5700/MAIN_BODY/9.png" },
+                    { nombre: "HS015", img: "img/sensores/5700/MAIN_BODY/10.png" },
+                    { nombre: "Rotor", img: "img/sensores/5700/MAIN_BODY/11.png" },
+                    { nombre: "VOID", img: "img/sensores/5700/MAIN_BODY/12.jpeg" },
+                    { nombre: "CARRIAGE", img: "img/sensores/5700/MAIN_BODY/13.jpeg" },
+                    { nombre: "HS004 TR/D", img: "img/sensores/5700/MAIN_BODY/14.jpeg" },
+                    { nombre: "HS015 (foto 2)", img: "img/sensores/5700/MAIN_BODY/15.jpeg" },
+                    { nombre: "HS015 (foto 2)", img: "img/sensores/5700/MAIN_BODY/16.jpeg" },
+                    { nombre: "HS015 (foto 2)", img: "img/sensores/5700/MAIN_BODY/17.jpeg" },
+                    { nombre: "HS015 (foto 2)", img: "img/sensores/5700/MAIN_BODY/18.jpeg" },
+                    { nombre: "HS015 (foto 2)", img: "img/sensores/5700/MAIN_BODY/19.jpeg" }
+                ],
+                "FF": [
+                    { nombre: "FEED AND FRAME", img: "img/sensores/5700/FF/1.png" },
+                    { nombre: "BOARDS", img: "img/sensores/5700/FF/2.jpeg" },
+                    { nombre: "BOARDS SIN PLASTICO", img: "img/sensores/5700/FF/3.jpeg" },
+                    { nombre: "DIP SWITCHS", img: "img/sensores/5700/FF/4.jpeg" }
+                ],
+                "SF12": [
+                    { nombre: "Separator 1-2", img: "img/sensores/5700/SF12/1.png" }
+                ],
+                "SF34": [
+                    { nombre: "Separator 3-4", img: "img/sensores/5700/SF34/1.png" }
+                ]
+            },
+            "MS500AR": {
+                "CSM": [
+                    { nombre: "Módulo CSM", img: "img/sensores/MS500/CSM/1.png" }
+                ],
+                "BC": [
+                    { nombre: "Módulo BC", img: "img/sensores/MS500/BC/1.png" }
+                ],
+                "FrontTransport": [
+                    { nombre: "Front Transport", img: "img/sensores/MS500/FRONT_TRANSPORT/1.png" }
+                ],
+                "MidTransport": [
+                    { nombre: "Mid Transport", img: "img/sensores/MS500/MID_TRANSPORT/1.png" }
+                ],
+                "CenterIndividual": [
+                    { nombre: "Center Indiv.", img: "img/sensores/MS500/CENTER_TRANSPORT1/1.png" }
+                ],
+                "CenterDual": [
+                    { nombre: "Center Dual", img: "img/sensores/MS500/CENTER_TRANSPORT2/1.png" }
+                ],
+                "BMD": [
+                    { nombre: "Módulo BMD", img: "img/sensores/MS500/BMD/1.png" }
+                ]
+            },
+            "MX8200": {
+                "CSM": [{ nombre: "CSM SENSORES", img: "img/sensores/8200/CSM/1.png" }]
+            }
+        };
+
+        const dbSpares = {
+            "MX5700": [
+                { titulo: "Reemplazo Pick Module", archivo: "esto es una prueba.pdf", img : "img/sensores/5700/MINI/prueba de miniatura.png" },
+                { titulo: "Desarme Main Body", archivo: "DESARME_BODY.pdf" },
+                { titulo: "Cambio de Correas", archivo: "CAMBIO_CORREAS.pdf" }
+            ],
+            "MS500AR": [
+                { titulo: "Bill Checker Unit", archivo: "BCU.pdf", img : "img/sensores/MS500/MINI/BCU.png" },
+                { titulo: "Customer Service Module", archivo: "CSM.pdf" , img:"img/sensores/MS500/MINI/CSM.png"},
+                { titulo: "Front Transport Path", archivo: "Front_Transport.pdf" , img:"img/sensores/MS500/MINI/FrM.png"},
+                { titulo: "Option Module", archivo: "Option_Module.pdf" , img:"img/sensores/MS500/MINI/Option_Module.png"},
+                { titulo: "Rear Module", archivo: "REAR_MODULE.pdf" , img:"img/sensores/MS500/MINI/Rear_Module.png"},
+                { titulo: "Mid Transport Path (TOP)", archivo: "MID_TOP.pdf" , img:"img/sensores/MS500/MINI/mid_topmodule.png"},
+                { titulo: "Mid Transport Path (BOTTOM)", archivo: "MID_BOTTOM.pdf" , img:"img/sensores/MS500/MINI/mid_bottommodule.png"},
+                { titulo: "Center Transport Upper Path", archivo: "CENTER_UPPER.pdf" , img:"img/sensores/MS500/MINI/CTUM.png"},
+                { titulo: "Center Transport Mid Path", archivo: "CENTER_DOWN.pdf" , img:"img/sensores/MS500/MINI/CTMM.png"},
+                { titulo: "Center Transport Lower Path", archivo: "CENTER_LOWER.pdf" , img:"img/sensores/MS500/MINI/CTLM.png"},
+                { titulo: "MainBoard", archivo: "MAINBOARD.pdf", img:"img/sensores/MS500/MINI/CTLM.png"},
+                { titulo: "Bench Module Up", archivo: "BMU.pdf", img: "img/sensores/MS500/MINI/BMU.png"},
+                { TITULO: "Bench Module Down", archivo: "algo.pdf", img: "img/sensores/MS500/MINI/BMD.png"}
+            ],
+            "MX8200": [
+                { titulo: "Manual asdasdasiento CSM", archivo: "MS500_ERROR_CODE.pdf", img: "img/sensores/8200/MINI/cambio.png" }, // extra, añadir esto a lo demas para subir la mini
+                { titulo: "Reemplazo Cintas Transport", archivo: "CINTAS_TR.pdf" },
+                { titulo: "Ajuste Sensores", archivo: "AJUSTE_SENS.pdf" }
+            ]
+        };
+
+        function seleccionar(nombre) {
+            equipoActual = nombre;
+            let prefijo = (nombre === 'MX5700') ? '5700' : (nombre === 'MS500AR' ? 'MS500' : '8200');
+
+            document.getElementById('menu-principal').classList.add('oculto');
+            document.getElementById('controles-navegacion').classList.remove('oculto');
+            document.getElementById('visor').classList.remove('oculto');
+
+            document.getElementById('pdf-errores').src = `img/${prefijo}_ERROR_CODE.pdf#toolbar=1`;
+
+            if (nombre === 'MX5700') {
+                document.getElementById('pdf-sensores').src = `img/sensores/5700/5700_SENS.pdf#toolbar=1`;
+                document.getElementById('pdf-instalacion').src = `img/sensores/5700/5700_INSTALACION.pdf#toolbar=1`;
+            } else if (nombre === 'MS500AR') {
+                document.getElementById('pdf-sensores').src = `img/sensores/MS500/MS500_SENSORES.pdf#toolbar=1`;
+                document.getElementById('pdf-instalacion').src = `img/sensores/MS500/MS500_INSTALACION.pdf#toolbar=1`;
+            } else if (nombre === 'MX8200') {
+                document.getElementById('pdf-sensores').src = `img/sensores/8200/8200_SENS.pdf#toolbar=1`;
+                document.getElementById('pdf-instalacion').src = `img/sensores/8200/8200_INSTALACION.pdf#toolbar=1`;
+            }
+
+            switchTabDer('pdf');
+            switchTabIzq('sensores');
+            cargarSpares(nombre);
+        }
+
+        function cargarSpares(equipo) {
+            const contenedorGrid = document.getElementById('grid-spare-container');
+            const listaSpares = dbSpares[equipo] || [];
+
+            document.getElementById('grid-spare-container').classList.remove('oculto');
+            document.getElementById('visor-spare-pdf').classList.add('oculto');
+
+            let html = "";
+            let prefijoCarpeta = (equipo === 'MX5700') ? '5700' : (equipo === 'MS500AR' ? 'MS500' : '8200');
+
+            if (listaSpares.length === 0) {
+                html = "<p style='color:#666; width:100%;'>No hay manuales cargados.</p>";
+            } else {
+                listaSpares.forEach(item => {
+                    let rutaCompleta = `img/sensores/${prefijoCarpeta}/SPARE/${item.archivo}`;
+
+                    let imagenHTML = "";
+                    if (item.img && item.img.trim() !== "") {
+                        // Si hay ruta de imagen, se muestra la foto
+                        imagenHTML = `<img src="${item.img}" style="width:100%; height:100px; object-fit:contain; margin-bottom:10px;">`;
+                    } else {
+                        // Si no, mostramos el ícono genérico
+                        imagenHTML = `<div class="icon-pdf">📄</div>`;
+                    }
+
+                    html += `
+                        <div class="card-spare" onclick="abrirSparePDF('${rutaCompleta}')">
+                            ${imagenHTML}
+                            <div class="titulo-spare">${item.titulo}</div>
+                        </div>
+                    `;
+                });
+            }
+            contenedorGrid.innerHTML = html;
+        }
+
+        function abrirSparePDF(ruta) {
+            document.getElementById('grid-spare-container').classList.add('oculto');
+            const visor = document.getElementById('visor-spare-pdf');
+            visor.classList.remove('oculto');
+            document.getElementById('iframe-spare').src = ruta + "#toolbar=1";
+
+            visor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function cerrarSparePDF() {
+            document.getElementById('iframe-spare').src = "";
+            document.getElementById('visor-spare-pdf').classList.add('oculto');
+            document.getElementById('grid-spare-container').classList.remove('oculto');
+        }
+
+        function switchTabIzq(tipo) {
+            document.getElementById('btn-izq-sensores').classList.toggle('active', tipo === 'sensores');
+            document.getElementById('btn-izq-actuadores').classList.toggle('active', tipo === 'actuadores');
+            document.getElementById('btn-izq-nav').classList.toggle('active', tipo === 'nav');
+            if (tipo === 'sensores') mostrarLayout('SENSORES');
+            else if (tipo === 'actuadores') mostrarLayout('ACTUADORES');
+            else mostrarExploracion();
+        }
+
+        function switchTabDer(tipo) {
+            document.getElementById('btn-der-pdf').classList.toggle('active', tipo === 'pdf');
+            document.getElementById('btn-der-sens').classList.toggle('active', tipo === 'sens');
+            document.getElementById('btn-der-inst').classList.toggle('active', tipo === 'inst');
+            document.getElementById('pdf-errores').classList.toggle('oculto', tipo !== 'pdf');
+            document.getElementById('pdf-sensores').classList.toggle('oculto', tipo !== 'sens');
+            document.getElementById('pdf-instalacion').classList.toggle('oculto', tipo !== 'inst');
+        }
+
+        function mostrarLayout(modo) {
+            const col = document.getElementById('columna-dinamica');
+            let prefijo = (equipoActual === 'MX5700') ? '5700' : (equipoActual === 'MS500AR' ? 'MS500' : '8200');
+            let rutaImagen = `img/${prefijo}_${modo}.png`;
+
+            col.innerHTML = `
+                <h3>Layout de ${modo}</h3>
+                <div class="contenedor-zoom" id="area-zoom">
+                    <div id="lupa" class="zoom-lupa"></div>
+                    <img id="img-original" src="${rutaImagen}" class="img-layout-original">
+                </div>`;
+
+            initLupa();
+        }
+
+        function mostrarExploracion() {
+            const col = document.getElementById('columna-dinamica');
+            if (equipoActual === 'MX5700') {
+                col.innerHTML = `
+        <h3>Exploración MX5700</h3>
+        <div class="contenedor-interactivo">
+            <img src="img/5700_MODULOS.png">
+            <div class="zona-modulo" onclick="mostrarNivel2('Throat')" style="top: 7%; left: 83%; width: 16.5%; height: 8.5%;">
+                <div class="etiqueta-modulo">THROAT</div>
+            </div>
+            <div class="zona-modulo" onclick="mostrarNivel2('Main Body')" style="top: 4.6%; left: 19%; width: 64%; height: 26%;">
+                <div class="etiqueta-modulo">MAIN BODY</div>
+            </div>
+            <div class="zona-modulo" onclick="mostrarNivel2('FF')" style="top: 31%; left: 27%; width: 56%; height: 68%;">
+                <div class="etiqueta-modulo">FF</div>
+            </div>
+            <div class="zona-modulo" onclick="mostrarNivel2('SF12')" style="top: 30%; left: 19%; width: 7.8%; height: 35%;">
+                <div class="etiqueta-modulo">SF12</div>
+            </div>
+            <div class="zona-modulo" onclick="mostrarNivel2('SF34')" style="top: 63.5%; left: 19%; width: 7.8%; height: 36%;">
+                <div class="etiqueta-modulo">SF34</div>
+            </div>
+        </div>`;
+            } else if (equipoActual === 'MS500AR') {
+                col.innerHTML = `
+        <h3>Exploración MS500</h3>
+        <div class="contenedor-interactivo">
+            <img src="img/sensores/MS500/MODULOS_MS500.png">
+            <div class="zona-modulo" onclick="mostrarNivel2('BMD')" style="top: 31.5%; left: 16.5%; width: 59%; height: 66%;">
+                <div class="etiqueta-modulo" style="top: 40%; left: 40%; font-size: 10px; padding: 3px 6px;">BMD</div>
+            </div>
+            <div class="zona-modulo" onclick="mostrarNivel2('CSM')" style="top: 1%; left: 60%; width: 25%; height: 25%;">
+                <div class="etiqueta-modulo">CSM</div>
+            </div>
+            <div class="zona-modulo" onclick="mostrarNivel2('BC')" style="top: 14%; left: 41%; width: 13.5%; height: 8.5%;">
+                <div class="etiqueta-modulo">BC</div>
+            </div>
+            <div class="zona-modulo" onclick="mostrarNivel2('FrontTransport')" style="top: 13%; left: 60%; width: 10%; height: 13%;">
+                <div class="etiqueta-modulo" style="top:-15px">Front Trans.</div>
+            </div>
+            <div class="zona-modulo" onclick="mostrarNivel2('MidTransport')" style="top: 26%; left: 16%; width: 48%; height: 5%;">
+                <div class="etiqueta-modulo" style="top:-15px">Mid Transport</div>
+            </div>
+            <div class="zona-modulo" onclick="mostrarNivel2('CenterIndividual')" style="top: 77%; left: 16%; width: 6%; height: 6%;">
+                <div class="etiqueta-modulo" style="left:-55px">Center Indiv.</div>
+            </div>
+            <div class="zona-modulo" onclick="mostrarNivel2('CenterDual')" style="top: 77%; left: 43%; width: 6%; height: 6%;">
+                <div class="etiqueta-modulo" style="left:35px">Center Dual</div>
+            </div>
+        </div>`;
+            } else if (equipoActual === 'MX8200') {
+                col.innerHTML = `
+        <h3>Exploración MX8200</h3>
+        <div class="contenedor-interactivo">
+            <img src="img/8200_MODULOS.png">
+            <div class="zona-modulo" onclick="mostrarNivel2('CSM')" style="top: 15.5%; left: 67.5%; width: 31.5%; height: 17.4%;">
+                <div class="etiqueta-modulo" style="top: 40%; left: 40%;">CSM</div>
+            </div>
+            <div class="zona-modulo" onclick="mostrarNivel2('BC')" style="top: 32.8%; left: 68%; width: 14%; height: 8%;">
+                <div class="etiqueta-modulo" style="top: 40%; left: 40%;">BC</div>
+            </div>
+            <div class="zona-modulo" onclick="mostrarNivel2('MID_TR')" style="top: 39%; left: 20%; width: 80%; height: 10%;">
+                <div class="etiqueta-modulo">Mid_TR</div>
+            </div>
+        </div>`;
+            }
+        }
+
+        function mostrarNivel2(nombreModulo) {
+            const col = document.getElementById('columna-dinamica');
+            const sensores = dbSensores[equipoActual][nombreModulo] || [];
+            let gridHtml = `<div style="text-align:left;"><button class="btn-volver" onclick="mostrarExploracion()">⬅ VOLVER</button></div><h3>Módulo: ${nombreModulo}</h3><div class="grid-sensores">`;
+            sensores.forEach((s, index) => {
+                gridHtml += `<div class="item-sensor" onclick="mostrarNivel3('${nombreModulo}', ${index})"><p style="color:#ff983f; font-size:10px; font-weight:bold; margin:0 0 5px 0;">${s.nombre}</p><img src="${s.img}" class="img-sensor-min"></div>`;
+            });
+            col.innerHTML = gridHtml + `</div>`;
+        }
+
+        function mostrarNivel3(nombreModulo, index) {
+            const col = document.getElementById('columna-dinamica');
+            const listaModulo = dbSensores[equipoActual][nombreModulo];
+            const sensor = listaModulo[index];
+            let btnAnterior = `<button class="btn-nav" ${index === 0 ? 'disabled' : `onclick="mostrarNivel3('${nombreModulo}', ${index - 1})"`}>◀ ANTERIOR</button>`;
+            let btnSiguiente = `<button class="btn-nav" ${index === listaModulo.length - 1 ? 'disabled' : `onclick="mostrarNivel3('${nombreModulo}', ${index + 1})"`}>SIGUIENTE ▶</button>`;
+            col.innerHTML = `<div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 15px;"><button class="btn-volver" style="margin-bottom:0;" onclick="mostrarNivel2('${nombreModulo}')">⬅ VOLVER</button><div class="nav-buttons-container">${btnAnterior}${btnSiguiente}</div></div><h3>${sensor.nombre}</h3><div style="background:#000; padding:10px; border-radius:15px; border:1px solid #ff6600; display:flex; justify-content:center;"><img src="${sensor.img}" style="max-width:100%; height:auto; border-radius:10px;"></div><p style="color:#666; margin-top:10px; font-size:11px;">Imagen ${index + 1} de ${listaModulo.length}</p>`;
+        }
+
+        function irAlMenu() {
+            document.getElementById('menu-principal').classList.remove('oculto');
+            document.getElementById('controles-navegacion').classList.add('oculto');
+            document.getElementById('visor').classList.add('oculto');
+
+            cerrarSparePDF();
+
+            equipoActual = "";
+            document.getElementById('pdf-errores').src = "";
+            document.getElementById('pdf-sensores').src = "";
+            document.getElementById('pdf-instalacion').src = "";
+        }
+
+        function initLupa() {
+            const lupa = document.getElementById('lupa');
+            const img = document.getElementById('img-original');
+            const area = document.getElementById('area-zoom');
+
+            if (!img || !area || !lupa) return;
+
+            area.addEventListener('mousemove', (e) => {
+                if (!lupaActiva) return;
+
+                lupa.style.display = "block";
+
+                const rect = img.getBoundingClientRect();
+                let x = e.pageX - rect.left - window.pageXOffset;
+                let y = e.pageY - rect.top - window.pageYOffset;
+
+                lupa.style.left = (x - lupa.offsetWidth / 2) + "px";
+                lupa.style.top = (y - lupa.offsetHeight / 2) + "px";
+
+                const zoomLevel = 2;
+                lupa.style.backgroundImage = `url('${img.src}')`;
+                lupa.style.backgroundSize = (img.width * zoomLevel) + "px " + (img.height * zoomLevel) + "px";
+
+                let posX = (x * zoomLevel) - (lupa.offsetWidth / 2);
+                let posY = (y * zoomLevel) - (lupa.offsetHeight / 2);
+
+                lupa.style.backgroundPosition = `-${posX}px -${posY}px`;
+            });
+
+            area.addEventListener('mouseleave', () => {
+                lupa.style.display = "none";
+            });
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key.toLowerCase() === 'z') {
+                lupaActiva = !lupaActiva;
+                const lupa = document.getElementById('lupa');
+                if (lupa && !lupaActiva) {
+                    lupa.style.display = "none";
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
