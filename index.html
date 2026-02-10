@@ -384,7 +384,7 @@
         <img src="img/Belltech.jpg" alt="Belltech" class="logo-belltech">
         <div style="text-align:left;">
             <h1 style="color:#ff6600; margin:0; letter-spacing:2px; font-size: 22px;">DiagnosticAR</h1>
-            <p style="margin:0; color:#888; font-weight:bold; font-size: 11px;">ALAN CARITA - CCEE BELLTECH ARGENTINA 2026 live</p>
+            <p style="margin:0; color:#888; font-weight:bold; font-size: 11px;">ALAN CARITA - CCEE BELLTECH ARGENTINA 2026 live222</p>
         </div>
     </div>
 
@@ -808,25 +808,15 @@
                 }
             }
         });
-        function viewPDF(pdfUrl) {
-    if (pdfUrl) {
-        // 1. Armamos la dirección completa de internet donde está tu PDF
-        // (Esto es necesario porque Google no puede entrar a tu carpeta local)
-        var githubUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/')) + '/' + pdfUrl;
-
-        // 2. Le pedimos a Google que renderice ese PDF
-        var googleViewerUrl = "https://docs.google.com/viewer?url=" + encodeURIComponent(githubUrl) + "&embedded=true";
-
-        // 3. Metemos esa dirección de Google en tu iframe (la ventanita)
-        var viewer = document.getElementById('pdf-viewer');
-        viewer.src = googleViewerUrl;
-
-        // 4. Abrimos el modal para que lo veas
-        document.getElementById('pdf-modal').style.display = 'block';
+        function viewPDF(rutaPdf) {
+    // Si la ruta existe, abrimos una pestaña nueva
+    if (rutaPdf) {
+        window.open(rutaPdf, '_blank');
     } else {
         alert("Manual no disponible.");
     }
 }
+        
     </script>
 </body>
 
