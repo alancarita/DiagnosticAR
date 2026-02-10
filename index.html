@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DiagnosticAR</title>
+    <title>DiagnosticAR - Soporte Técnico ATM</title>
     <style>
         body::-webkit-scrollbar {
             display: none;
@@ -808,6 +808,25 @@
                 }
             }
         });
+        function viewPDF(pdfUrl) {
+    if (pdfUrl) {
+        // 1. Armamos la dirección completa de internet donde está tu PDF
+        // (Esto es necesario porque Google no puede entrar a tu carpeta local)
+        var githubUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/')) + '/' + pdfUrl;
+
+        // 2. Le pedimos a Google que renderice ese PDF
+        var googleViewerUrl = "https://docs.google.com/viewer?url=" + encodeURIComponent(githubUrl) + "&embedded=true";
+
+        // 3. Metemos esa dirección de Google en tu iframe (la ventanita)
+        var viewer = document.getElementById('pdf-viewer');
+        viewer.src = googleViewerUrl;
+
+        // 4. Abrimos el modal para que lo veas
+        document.getElementById('pdf-modal').style.display = 'block';
+    } else {
+        alert("Manual no disponible.");
+    }
+}
     </script>
 </body>
 
