@@ -464,7 +464,13 @@
         const dbSensores = {
             "MX5700": {
                 "Throat": [
-                    { nombre: "THROAT", img: "img/sensores/5700/THROAT/1.png" }],
+                    { nombre: "THROAT", img: "img/sensores/5700/THROAT/1.png" },
+                    { nombre: "THROAT", img: "img/sensores/5700/THROAT/2.png" },
+                    { nombre: "THROAT", img: "img/sensores/5700/THROAT/3.png" },
+                    { nombre: "THROAT", img: "img/sensores/5700/THROAT/4.png" },
+                    { nombre: "THROAT", img: "img/sensores/5700/THROAT/5.png" }
+                ],
+                    
                 "Main Body": [
                     { nombre: "Main Body", img: "img/sensores/5700/MAIN_BODY/1.png" },
                     { nombre: "HS007/8", img: "img/sensores/5700/MAIN_BODY/2.png" },
@@ -507,7 +513,11 @@
                 ],
                 "SF34": [
                     { nombre: "Separator 3-4", img: "img/sensores/5700/SF34/1.png" }
-                ]
+                ],
+                "DIPSW5700": [
+                    { nombre: "Dip Switchs", img: "img/sensores/5700/DIPSW/1.png"},
+                    { nombre: "DIP SWITCHS", img: "img/sensores/5700/FF/4.jpeg" }
+                ],
             },
             "MS500AR": {
                 "CSM": [
@@ -530,7 +540,10 @@
                 ],
                 "BMD": [
                     { nombre: "Módulo BMD", img: "img/sensores/MS500/BMD/1.png" }
-                ]
+                ],
+                "RearTransport": [
+                    { nombre: "Round Transport Path", img: "img/sensores/MS500/BMD/1.png" }
+            ]
             },
             "MX8200": {
                 "CSM": [{ nombre: "CSM SENSORES", img: "img/sensores/8200/CSM/1.png" }]
@@ -544,11 +557,12 @@
                 { titulo: "Carriage", archivo: "CAMBIO_CORREAS.pdf" },
                 { titulo: "Cable Rotary", archivo: "CAMBIO_CORREAS.pdf" },
                 { titulo: "Feed and Frame", archivo: "CAMBIO_CORREAS.pdf" },
+                { titulo: "Throath", archivo: "THROATH.pdf", img: "img/sensores/5700/MINI/THROATH"}
             ],
             "MS500AR": [
                 { titulo: "Bill Checker Unit", archivo: "BCU.pdf", img : "img/sensores/MS500/MINI/BCU.png" },
                 { titulo: "Customer Service Module", archivo: "CSM.pdf" , img:"img/sensores/MS500/MINI/CSM.png"},
-                { titulo: "Front Transport Path", archivo: "Front_Transport.pdf" , img:"img/sensores/MS500/MINI/FrM.png"},
+                { titulo: "Front Transport Path", archivo: "FRONT_TRANSPORT.pdf" , img:"img/sensores/MS500/MINI/FrM.png"},
                 { titulo: "Option Module", archivo: "Option_Module.pdf" , img:"img/sensores/MS500/MINI/Option_Module.png"},
                 { titulo: "Rear Module", archivo: "REAR_MODULE.pdf" , img:"img/sensores/MS500/MINI/Rear_Module.png"},
                 { titulo: "Mid Transport Path (TOP)", archivo: "MID_TOP.pdf" , img:"img/sensores/MS500/MINI/Mid_TopModule.png"},
@@ -687,26 +701,35 @@
             <div class="zona-modulo" onclick="mostrarNivel2('Throat')" style="top: 7%; left: 83%; width: 16.5%; height: 8.5%;">
                 <div class="etiqueta-modulo">THROAT</div>
             </div>
+
             <div class="zona-modulo" onclick="mostrarNivel2('Main Body')" style="top: 4.6%; left: 19%; width: 64%; height: 26%;">
                 <div class="etiqueta-modulo">MAIN BODY</div>
             </div>
+
             <div class="zona-modulo" onclick="mostrarNivel2('FF')" style="top: 31%; left: 27%; width: 56%; height: 68%;">
-                <div class="etiqueta-modulo">FF</div>
+            <div class="etiqueta-modulo">FF</div>
             </div>
+
+            <div class="zona-modulo" onclick="mostrarNivel2('DIPSW5700')" style="top: 67%; left: 60%; width: 7%; height: 5.5%;">
+            <div class="etiqueta-modulo">Dip Switchs</div>
+            </div>
+
             <div class="zona-modulo" onclick="mostrarNivel2('SF12')" style="top: 30%; left: 19%; width: 7.8%; height: 35%;">
                 <div class="etiqueta-modulo">SF12</div>
             </div>
+
             <div class="zona-modulo" onclick="mostrarNivel2('SF34')" style="top: 63.5%; left: 19%; width: 7.8%; height: 36%;">
                 <div class="etiqueta-modulo">SF34</div>
             </div>
+
         </div>`;
             } else if (equipoActual === 'MS500AR') {
                 col.innerHTML = `
         <h3>Exploración MS500</h3>
         <div class="contenedor-interactivo">
             <img src="img/sensores/MS500/MODULOS_MS500.png">
-            <div class="zona-modulo" onclick="mostrarNivel2('BMD')" style="top: 31.5%; left: 16.5%; width: 59%; height: 66%;">
-                <div class="etiqueta-modulo" style="top: 40%; left: 40%; font-size: 10px; padding: 3px 6px;">BMD</div>
+            <div class="zona-modulo" onclick="mostrarNivel2('BMD')" style="top: 31.5%; left: 16.5%; width: 60.5%; height: 67.5%;">
+                <div class="etiqueta-modulo" style="top: 40%; left: 45%; font-size: 10px; padding: 3px 6px;">BMD</div>
             </div>
             <div class="zona-modulo" onclick="mostrarNivel2('CSM')" style="top: 1%; left: 60%; width: 25%; height: 25%;">
                 <div class="etiqueta-modulo">CSM</div>
@@ -718,7 +741,7 @@
                 <div class="etiqueta-modulo" style="top:-15px">Front Trans.</div>
             </div>
             <div class="zona-modulo" onclick="mostrarNivel2('MidTransport')" style="top: 26%; left: 16%; width: 48%; height: 5%;">
-                <div class="etiqueta-modulo" style="top:-15px">Mid Transport</div>
+                <div class="etiqueta-modulo" style="top:1px">Mid Transport</div>
             </div>
             <div class="zona-modulo" onclick="mostrarNivel2('CenterIndividual')" style="top: 77%; left: 16%; width: 6%; height: 6%;">
                 <div class="etiqueta-modulo" style="left:-55px">Center Indiv.</div>
@@ -726,6 +749,8 @@
             <div class="zona-modulo" onclick="mostrarNivel2('CenterDual')" style="top: 77%; left: 43%; width: 6%; height: 6%;">
                 <div class="etiqueta-modulo" style="left:35px">Center Dual</div>
             </div>
+            <div class="zona-modulo" onclick="mostrarNivel2('RearTransport')" style="top: 13%; left: 16%; width: 25%; height: 13.3%;">
+                <div class="etiqueta-modulo">Round Transport Path</div>
         </div>`;
             } else if (equipoActual === 'MX8200') {
                 col.innerHTML = `
