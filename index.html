@@ -9,7 +9,7 @@
         body::-webkit-scrollbar {
             display: none;
         }
-
+        
         body {
             -ms-overflow-style: none;
             scrollbar-width: none;
@@ -598,18 +598,18 @@
                 { titulo: "Center Transport Upper Path", archivo: "CENTER_UPPER.pdf" , img:"img/sensores/MS500/MINI/CTUM.png"},
                 { titulo: "Center Transport Mid Path", archivo: "CENTER_DOWN.pdf" , img:"img/sensores/MS500/MINI/CTMM.png"},
                 { titulo: "Center Transport Lower Path", archivo: "CENTER_LOWER.pdf" , img:"img/sensores/MS500/MINI/CTLM.png"},
-                { titulo: "MainBoard", archivo: "MAINBOARD.pdf", img:"img/sensores/MS500/MINI/mainboard.png"},
+                { titulo: "RBU BOARD", archivo: "MAINBOARD.pdf", img:"img/sensores/MS500/MINI/RBU_BOARD.png"},
                 { titulo: "Bench Module Up", archivo: "BMU.pdf", img: "img/sensores/MS500/MINI/BMU.png"},
                 { TITULO: "Bench Module Down", archivo: "algo.pdf", img: "img/sensores/MS500/MINI/BMD.png"}
             ],
             "MX8200": [
                 { titulo: "Bench Module Up", archivo: "MS500_ERROR_CODE.pdf", img: "img/sensores/8200/MINI/BMU.png" }, // extra, añadir esto a lo demas para subir la mini
                 { titulo: "Bench Module Down", archivo: "CINTAS_TR.pdf" , img: "img/sensores/8200/MINI/BMD.png" },
-                { titulo: "Customer Service Module", archivo: "AJUSTE_SENS.pdf" , img: "img/sensores/8200/MINI/cambio.png" },
-                { titulo: "Temporary Stacker", archivo: "AJUSTE_SENS.pdf" , img: "img/sensores/8200/MINI/cambio.png" },
-                { titulo: "Top Transport Path", archivo: "AJUSTE_SENS.pdf" , img: "img/sensores/8200/MINI/cambio.png" },
-                { titulo: "Bill Checker", archivo: "AJUSTE_SENS.pdf" , img: "img/sensores/8200/MINI/cambio.png" },
-                { titulo: "Front Transport Path", archivo: "AJUSTE_SENS.pdf" , img: "img/sensores/8200/MINI/cambio.png" },
+                { titulo: "Customer Service Module", archivo: "AJUSTE_SENS.pdf" , img: "img/sensores/8200/MINI/CSM.png" },
+                { titulo: "Temporary Stacker", archivo: "AJUSTE_SENS.pdf" , img: "img/sensores/8200/MINI/TSK.png" },
+                { titulo: "Top Transport Path", archivo: "AJUSTE_SENS.pdf" , img: "img/sensores/8200/MINI/TOP_TR.png" },
+                { titulo: "Bill Checker", archivo: "AJUSTE_SENS.pdf" , img: "img/sensores/8200/MINI/BCU.png" },
+                { titulo: "Front Transport Path", archivo: "AJUSTE_SENS.pdf" , img: "img/sensores/8200/MINI/ASD.png" },
                 { titulo: "Rear Acces Transit Transport Path", archivo: "AJUSTE_SENS.pdf" , img: "img/sensores/8200/MINI/cambio.png" },
                 { titulo: "Mid Transport Path", archivo: "AJUSTE_SENS.pdf" , img: "img/sensores/8200/MINI/cambio.png" },
                 { titulo: "Upper&Bottom Interface Guide", archivo: "AJUSTE_SENS.pdf" , img: "img/sensores/8200/MINI/cambio.png" },
@@ -645,7 +645,7 @@
                 document.getElementById('pdf-instalacion').src = `img/sensores/MS500/MS500_INSTALACION.pdf#toolbar=1`;
             } else if (nombre === 'MX8200') {
                 document.getElementById('pdf-sensores').src = `img/sensores/8200/8200_SENS.pdf#toolbar=1`;
-                document.getElementById('pdf-instalacion').src = `img/sensores/8200/8200_INSTALACION.pdf#toolbar=1`;
+                document.getElementById('pdf-instalacion').src = `img/sensores/5700/5700_INSTALACION.pdf#toolbar=1`;
             }
 
             switchTabDer('pdf');
