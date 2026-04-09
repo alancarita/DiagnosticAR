@@ -1,0 +1,23 @@
+INSTRUCTIVOS ÚTILES
+
+MX5700	Desencriptar la MainBoard
+	Calibración DD
+	Rescate de Trazas y Silent Debug
+	Puesta en servicio ATM
+	Instalacion
+
+BT6000	Reparación de fuente de PC
+	Reparación de fuente de Monitor
+	Remasterizacion
+	
+MS500	Pruebas de deposito/funcionamiento
+	Calibración Modulo CenterTransportDUAL
+	Calibración SN Touch
+	Táctil pantalla cliente
+	Rescate de Trazas
+	Puesta en Servicio ATS
+	Instalacion
+	
+
+MX8200	
+	

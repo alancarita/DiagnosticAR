@@ -385,8 +385,8 @@
         <div style="text-align:left;">
             <h1 style="color:#ff6600; margin:0; letter-spacing:2px; font-size: 22px;">DiagnosticAR</h1>
             <p style="margin:0; color:#888; font-weight:bold; font-size: 11px;">ALAN CARITA - CCEE BELLTECH ARGENTINA 2026</p>
-            <p style="margin:0; color:#00ff37; font-weight:bold; font-size: 11px;">Ultimos cambios: PRE - f431</p>
-            <p style="margin:0; color:#00ff37; font-weight:bold; font-size: 10px;"> Iconos y Manuales Spare MX5700</p>
+            <p style="margin:0; color:#00ff37; font-weight:bold; font-size: 11px;">Ultimos cambios: PRE - 7376a0b</p>
+            <p style="margin:0; color:#00ff37; font-weight:bold; font-size: 10px;"> Imagenes para soporte en MS500AR - Exploracion de Módulos</p>
 
         </div>
     </div>
@@ -525,28 +525,48 @@
             },
             "MS500AR": {
                 "CSM": [
-                    { nombre: "Módulo CSM", img: "img/sensores/MS500/CSM/1.png" }
+                    { nombre: "CSM Cliente", img: "img/sensores/MS500/CSM/1.jpeg" },
+                    { nombre: "Boquillas", img: "img/sensores/MS500/CSM/2.jpeg"},
+                    { nombre: "Boquillas", img: "img/sensores/MS500/CSM/3.png"},
+                    { nombre: "Interior", img: "img/sensores/MS500/CSM/4.jpeg"}
+                    
+                ],
+                "BMU": [
+                    { nombre: "Bench Module UP", img: "img/sensores/MS500/BMU/1.jpeg" },
+                    { nombre: "BMU de otro angulo ", img: "img/sensores/MS500/BMU/2.jpeg" },
+                    { nombre: "Sensor Open/Close BMU - Vista Isometrica jaja", img: "img/sensores/MS500/BMU/3.jpeg" },
+                    { nombre: "Sensor Open/Close BMU- Vista Lateral", img: "img/sensores/MS500/BMU/4.jpeg" },
+                    { nombre: "Sensor Open/Close BMU- Vista Superior", img: "img/sensores/MS500/BMU/5.jpeg" }
+                    
                 ],
                 "BC": [
-                    { nombre: "Módulo BC", img: "img/sensores/MS500/BC/1.png" }
+                    { nombre: "Módulo BC", img: "img/sensores/MS500/BC/1.png" },
+                    { nombre: "Vista Superior / Retirar 2 tornillos", img: "img/sensores/MS500/BC/2.jpeg" },
+                    { nombre: "Tapa Abierta", img: "img/sensores/MS500/BC/3.jpeg" }
                 ],
                 "FrontTransport": [
-                    { nombre: "Front Transport", img: "img/sensores/MS500/FRONT_TRANSPORT/1.png" }
+                    { nombre: "Front Transport Cerrado", img: "img/sensores/MS500/FRONT_TRANSPORT/1.jpeg" },
+                    { nombre: "Front Transport Abierto", img: "img/sensores/MS500/FRONT_TRANSPORT/2.jpeg" }
                 ],
                 "MidTransport": [
-                    { nombre: "Mid Transport", img: "img/sensores/MS500/MID_TRANSPORT/1.png" }
+                    { nombre: "Mid Transport", img: "img/sensores/MS500/MID_TRANSPORT/1.jpeg" },
+                    { nombre: "Mid Transport", img: "img/sensores/MS500/MID_TRANSPORT/2.jpeg" },
                 ],
                 "CenterIndividual": [
-                    { nombre: "Center Indiv.", img: "img/sensores/MS500/CENTER_TRANSPORT1/1.png" }
+                    { nombre: "Center Indiv.", img: "img/sensores/MS500/CENTER_TRANSPORT1/1.png" },
+                    { nombre: "Center Indiv", img: "img/sensores/MS500/CENTER_TRANSPORT1/2.png"}
                 ],
                 "CenterDual": [
                     { nombre: "Center Dual", img: "img/sensores/MS500/CENTER_TRANSPORT2/1.png" }
                 ],
                 "BMD": [
-                    { nombre: "Módulo BMD", img: "img/sensores/MS500/BMD/1.png" }
+                    { nombre: "Módulo BMD", img: "img/sensores/MS500/BMD/1.png" },
+                    { nombre: "Carro Caseteras Chicas", img: "img/sensores/MS500/BMD/2.png"},
+                    { nombre: "Tapa carro caseteras chicas", img: "img/sensores/MS500/BMD/3.png"},
+                    { nombre: "Tapa carro caseteras chicas 2", img: "img/sensores/MS500/BMD/4.png"}
                 ],
                 "RearTransport": [
-                    { nombre: "Round Transport Path", img: "img/sensores/MS500/BMD/1.png" }
+                    { nombre: "Round Transport Path", img: "img/sensores/MS500/REAR/1.jpeg" }
             ]
             },
             "MX8200": {
@@ -776,6 +796,9 @@
             <img src="img/sensores/MS500/MODULOS_MS500.png">
             <div class="zona-modulo" onclick="mostrarNivel2('BMD')" style="top: 31.5%; left: 16.5%; width: 60.5%; height: 67.5%;">
                 <div class="etiqueta-modulo" style="top: 40%; left: 45%; font-size: 10px; padding: 3px 6px;">BMD</div>
+            </div>
+            <div class="zona-modulo" onclick="mostrarNivel2('BMU')" style="top: 13%; left: 16%; width: 69%; height: 18%;">
+                <div class="etiqueta-modulo" style="top:48%; left: 48%; font-size: 10px; padding: 3px 6px;">BMU</div>
             </div>
             <div class="zona-modulo" onclick="mostrarNivel2('CSM')" style="top: 1%; left: 60%; width: 25%; height: 25%;">
                 <div class="etiqueta-modulo">CSM</div>
